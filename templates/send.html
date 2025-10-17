@@ -1,1 +1,235 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Sender</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .card {
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.85); /* Semi-transparent */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      border: none;
+    }
+    h2 {
+      font-weight: 600;
+      color: #2575fc;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      border: none;
+      transition: 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #2575fc, #6a11cb);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.25);
+    }
+    /* Optional: tint left column */
+    .left-col {
+      background: rgba(240, 248, 255, 0.6); /* Light bluish tint */
+      border-radius: 12px;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-6">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="card shadow-lg">
+          <div class="card-body p-5">
+            <h2 class="text-center mb-4">📨 Gmail Email Sender</h2>
+
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <!-- Form -->
+            <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+              <div class="row">
+                
+                <!-- Left Column -->
+                <div class="col-md-3 left-col me-3">
+
+                   <div class="mb-3">
+                    <label for="subject" class="form-label">Subject</label>
+                    <!-- <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter subject"> -->
+                     <select name="subject" id="subject" class="form-control" required>
+                    </select>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="to" class="form-label">To</label>
+                    <input type="email" name="to" id="to" class="form-control" placeholder="recipient@example.com" required>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="cc" class="form-label">CC</label>
+                    <input type="email" name="cc" id="cc" class="form-control" placeholder="cc@example.com">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="bcc" class="form-label">BCC</label>
+                    <input type="email" name="bcc" id="bcc" class="form-control" placeholder="bcc@example.com">
+                  </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-8  d-md-block">
+
+                  <div class="mb-3">
+                    <label for="body" class="form-label">Plain Text Body</label>
+                    <textarea class="form-control" name="body" id="body" rows="8" placeholder="Write your message..." required></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="html" class="form-label">HTML Body (optional)</label>
+                    <textarea class="form-control" name="html" id="html" rows="4" placeholder="Add custom HTML body..."></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="attachments" class="form-label">Attachments</label>
+                    <input type="file" name="attachments" id="attachments" class="form-control" multiple required>
+                  </div>
+
+                  <div class="d-grid mt-4"> 
+                    <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                      Send Email
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<script>
+  const currentDate = new Date();
+  var coverLetter =`MD. Khadeymul Islam
+[+8801915529401] | [khadeymulislam@gmail.com] | 
+https://www.linkedin.com/in/md-khadeymul-islam-nannu
+Dhaka, Bangladesh
+${currentDate.toLocaleDateString()}
+Dear Hiring Manager,
+
+I am excited to apply for the [Position Name] position at your organization. With over six years of hands-on experience in ERP implementation and software development within the Ready-Made Garments (RMG) sector, I bring a strong combination of technical proficiency and business process understanding to deliver efficient, scalable, and user-focused solutions.
+
+In my previous role, I was actively involved in the end-to-end ERP implementation for a buying house, covering critical modules such as MCD, M&M, SCM, PPC, TNA, Commercial, CRM, and Finance. My key contributions included:
+
+Configuring material control and store hierarchies to optimize inventory workflows and strengthen stock management policies.
+
+Supporting buyer order management, quotation and costing, and sample tracking to meet strict TNA deadlines.
+
+Mapping supply chain processes and managing commercial documentation, including LC, shipping, and compliance requirements.
+
+Assisting in the migration of Oracle Forms to Oracle APEX, significantly improving system accessibility and user experience.
+
+Utilizing the Production Planning Board to track line loading, WIP, and production milestones.
+
+Conducting detailed data analysis and reporting to enhance decision-making and operational efficiency.
+
+My technical expertise includes PL/SQL, SQL, Oracle Database, Oracle APEX, JavaScript, HTML, CSS, AJAX, and Flask. This diverse skill set enables me to design, customize, and integrate ERP applications that streamline operations and enhance user engagement across departments.
+
+With a proven track record of driving ERP efficiency and digital transformation, I am confident that my experience and technical depth would make me a valuable addition to your team.
+
+Please find my CV attached for your review. I would welcome the opportunity to discuss how my background aligns with your organization’s goals and how I can contribute to your continued success.
+
+Thank you for your time and consideration.
+
+Sincerely,
+Khadeymul Islam
+Oracle Application Developer
+Oracle APEX Cloud Certified Developer Professional
+OCP, OCA`
+document.getElementById("body").value=coverLetter;
+var position=document.getElementById("subject");
+position.addEventListener("change",function(){
+  if(this.value=="Application for the post of Oracle APEX Developer"){
+    newCoverLetter =coverLetter.replace("[Position Name]","Oracle APEX Developer");
+    document.getElementById("body").value=newCoverLetter;
+  }
+  else if(this.value=="Application for the post of PL/SQL Developer"){
+    newCoverLetter =coverLetter.replace("[Position Name]","PL/SQL Developer");
+    document.getElementById("body").value=newCoverLetter;
+  }
+  
+  else if(this.value=="Application for the post of Senior Back office Developer"){
+    newCoverLetter =coverLetter.replace("[Position Name]","Senior Back office Developer");
+    document.getElementById("body").value=newCoverLetter;
+  }
+  else if(this.value=="Application for the post of Senior Oracle Developer"){
+    newCoverLetter =coverLetter.replace("[Position Name]","Senior Oracle Developer");
+    document.getElementById("body").value=newCoverLetter;
+  }
+  else if(this.value=="Application for the post of Application Support Analyst"){
+    newCoverLetter =coverLetter.replace("[Position Name]","Application Support Analyst");
+    document.getElementById("body").value=newCoverLetter;
+  }
+  else if(this.value=="Application for the post of Senior Oracle APEX Developer"){
+    newCoverLetter =coverLetter.replace("[Position Name]","Senior Oracle APEX Developer");
+    document.getElementById("body").value=newCoverLetter;
+  }
+  else if(this.value=="Application for the post of Senior PL/SQL Developer"){
+    newCoverLetter =coverLetter.replace("[Position Name]","Senior PL/SQL Developer");
+    document.getElementById("body").value=newCoverLetter;
+  }
+  else if(this.value=="Application for the post of Oracle Database Application & Web Developer"){
+    newCoverLetter =coverLetter.replace("[Position Name]","Oracle Database Application & Web Developer");
+    document.getElementById("body").value=newCoverLetter;
+  }
+  else if(this.value=="Application for the post of Application Support Analyst"){
+    newCoverLetter =coverLetter.replace("[Position Name]","Application Support Analyst");
+    document.getElementById("body").value=newCoverLetter;
+  }
+  else if(this.value=="Application for the post of Oracle apex consultant"){
+    newCoverLetter =coverLetter.replace("[Position Name]","Oracle apex consultant");
+    document.getElementById("body").value=newCoverLetter;
+  }
+  else{
+    document.getElementById("body").value=coverLetter;
+  }
+})
+var options={"Oracle APEX Developer":"Application for the post of Oracle APEX Developer",
+"PL/SQL Developer":"Application for the post of PL/SQL Developer",
+"Senior Back office Developer":"Application for the post of Senior Back office Developer",
+"Senior Oracle Developer":"Application for the post of Senior Oracle Developer",
+"Application Support Analyst":"Application for the post of Application Support Analyst",
+"Senior Oracle APEX Developer":"Application for the post of Senior Oracle APEX Developer",
+"Senior PL/SQL Developer":"Application for the post of Senior PL/SQL Developer",
+"Oracle Database Application & Web Developer":"Application for the post of Oracle Database Application & Web Developer",
+"Application Support Analyst":"Application for the post of Application Support Analyst",
+"Oracle apex consultant":"Application for the post of Oracle apex consultant"
+}; 
+position.appendChild(new Option("--Select--",""));
+for (const [text, value] of Object.entries(options)) {
+  position.appendChild(new Option(text, value));
+} 
+</script>
+
+</html>
